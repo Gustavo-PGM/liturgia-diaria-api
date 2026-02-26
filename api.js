@@ -2,7 +2,8 @@ import { Extrairhomilia} from "./scraping.js";
 import express from "express";
 
 const app = express();
-const PORT = 333
+const PORT = process.env.PORT || 333
+
 
 app.get("/homilia", async (request, response) => {
 
@@ -11,9 +12,5 @@ app.get("/homilia", async (request, response) => {
   response.json({homilia})
 })
 
-
-app.listen(PORT, () => {
-  console.log("Servidor Rodando...")
-})
 
 export default app;
