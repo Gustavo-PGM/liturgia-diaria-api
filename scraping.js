@@ -1,7 +1,5 @@
 import axios from "axios";
 import * as cheerio from "cheerio"
-import 'dotenv/config';
-
 
 export const Extrairhomilia = async () => {
   const url = (await axios.get(process.env.URL_HOMILIA)).data;
