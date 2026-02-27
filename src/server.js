@@ -25,7 +25,7 @@ app.get("/", async (request, response) => {
 
     const respostaFormatada = {
 
-      informacoesDia: {
+      informacoesDoDia: {
 
         data: homiliaData.informacoesDia?.data || "Data não encontrada",
         tempoLiturgico: homiliaData.informacoesDia?.tempoLiturgico || "Tempo litúrgico não encontrado",
