@@ -28,7 +28,7 @@ export const extrairLiturgia = async () => {
 
 
   } catch (erro) {
-    return { erro: "Falha em buscar as liturgia do dia. Reporte no GitHub: https://github.com/Gustavo-PGM/liturgia-diaria-api" };
+    return { erro: "Falha em buscar as liturgia do dia. Reporte no GitHub: https://github.com/Gustavo-PGM/liturgia-diaria-api" , mensagem: erro};
   }
 };
 
