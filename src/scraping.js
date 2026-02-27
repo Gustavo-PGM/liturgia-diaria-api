@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import 'dotenv/config';
+
 import { converterParaVersiculo } from './utils/formatador.js';
 
 

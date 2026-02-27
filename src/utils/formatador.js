@@ -1,3 +1,5 @@
+
+
 // converte números normais em números elevados para ficar igual na biblia
 export const converterParaVersiculo = (textoComNumero) => {
   const numerosPequenos = {
