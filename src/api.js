@@ -15,7 +15,7 @@ app.get("/", async (request, response) => {
   response.json({
     data: homiliaData.informacoesDia?.data || "Data não encontrada",
     tempoLiturgico: homiliaData.informacoesDia?.tempoLiturgico || "Tempo litúrgico não encontrado",
-    cor: homiliaData.informacoesDia?.cor || "Cor não encontrada",
+    cor: homiliaData.informacoesDia?.corLiturgica || "Cor não encontrada",
     imagemTempo: homiliaData.informacoesDia?.imagem || null,
     ...liturgia, // '...liturgia' já manda Leitura, Salmo e Evangelho aqui dentro direto
     homilia: homiliaData.texto
