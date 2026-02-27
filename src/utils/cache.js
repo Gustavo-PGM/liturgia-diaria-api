@@ -5,8 +5,8 @@ import { supabase } from '../config/supabase.js';
 export const obterCacheSupabase = async (dataHoje) => {
   const { data: cacheSalvo } = await supabase
     .from('cache_liturgia')
-    .select('resposta_json')
-    .eq('data_dia', dataHoje)
+    .select('liturgia_json')
+    .eq('data_referencia', dataHoje)
     .maybeSingle();
     
   return cacheSalvo ? cacheSalvo.resposta_json : null;
