@@ -32,7 +32,7 @@ fetch('[https://liturgia-diaria-api-alpha.vercel.app/](https://liturgia-diaria-a
 ---
 ```json
 {
-  "informacoesDia": {
+  "informacoesDoDia": {
     "data": "Sexta-feira, 27 de Fevereiro de 2026",
     "tempoLiturgico": "1a. Semana da Quaresma - Ciclo da Pascoa",
     "cor": "Roxo",
