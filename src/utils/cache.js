@@ -9,12 +9,12 @@ export const obterCacheSupabase = async (dataHoje) => {
     .eq('data_referencia', dataHoje)
     .maybeSingle();
     
-  return cacheSalvo ? cacheSalvo.resposta_json : null;
+  return cacheSalvo ? cacheSalvo.liturgia_json : null;
 };
 
 
 export const salvarCacheSupabase = async (dataHoje, jsonFormatado) => {
   await supabase
     .from('cache_liturgia')
-    .insert([{ data_dia: dataHoje, resposta_json: jsonFormatado }]);
+    .insert([{ data_referencia: dataHoje, liturgia_json: jsonFormatado }]);
 };
