@@ -1,6 +1,6 @@
 
 
-// converte números normais em números elevados para ficar igual na biblia
+// converte números normais em números elevados para ficar com versículos iguais na biblia
 export const converterParaVersiculo = (textoComNumero) => {
   const numerosPequenos = {
     '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
