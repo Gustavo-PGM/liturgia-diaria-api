@@ -32,12 +32,11 @@ fetch('[https://liturgia-diaria-api-alpha.vercel.app/](https://liturgia-diaria-a
 ---
 ```json
 {
-  "data": "Sexta-feira, 27 de Fevereiro de 2026",
-  "tempoLiturgico": "1ª Semana da Quaresma – Ciclo da Pascoa",
-  "imagemTempo": "https://sagradaliturgia.com.br/images/roxo.png",
-  "primeiraLeitura": {
-    "referencia": "Ezequiel 18,21-28",
-    "texto": "Leitura da profecia de Ezequiel..."
+  "informacoesDia": {
+    "data": "Sexta-feira, 27 de Fevereiro de 2026",
+    "tempoLiturgico": "1a. Semana da Quaresma - Ciclo da Pascoa",
+    "cor": "Roxo",
+    "imagemTempo": "https://sagradaliturgia.com.br/images/roxo.png"
   },
   "segundaLeitura": "Não encontrada",
   "salmo": {

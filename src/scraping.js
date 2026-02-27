@@ -16,7 +16,9 @@ export const extrairLiturgia = async () => {
 
     const texto = $('body').text().replace(/\t/g, ''); 
 
-    // usei esses filtros aqui pra "recortar" o texto e separar o que é cada leitura
+
+
+    // aqui pra "recortar" o texto e separar o que é cada leitura
     const primeiraLeitura = texto.match(/Primeira Leitura:(.*?)(?=Salmo Responsorial:|Segunda Leitura:)/s);
     const salmo = texto.match(/Salmo Responsorial:(.*?)(?=Segunda Leitura:|Evangelho:)/s);
     const segundaLeitura = texto.match(/Segunda Leitura:(.*?)(?=Evangelho:)/s);
@@ -50,7 +52,7 @@ export const extrairLiturgia = async () => {
         }
 
       }
-      // procura por qualquer sequência de números no texto e transforma em versículo
+      // procura por qualquer sequência de números no texto e transforma em versículo(números elevados)
       textoLimpo = textoLimpo.replace(/\d+/g, (match) => converterParaVersiculo(match));
 
 
@@ -63,7 +65,6 @@ export const extrairLiturgia = async () => {
 
 
 
-    //feito para deixar o salmo organizado e separar os refrões
     const estruturarSalmo = (bloco) => {
       if (!bloco) return "Não encontrado";
       const linhas = bloco[1].trim().split('\n').map(l => l.trim()).filter(l => l !== '');
@@ -101,12 +102,12 @@ export const extrairHomilia = async () => {
     $('br').replaceWith('\n');
     $('p').append('\n');
 
-    //pega as informações iniciais
+  
     const cabecalhoBloco = $('.ui-body.ui-body-a.ui-corner-all').first();
     const imagemCaminho = cabecalhoBloco.find('img').attr('src');
 
 
-    // extrair a cor liturgica com verificações
+
     let corFormatada = "Cor não encontrada";
 
     if (imagemCaminho) {
