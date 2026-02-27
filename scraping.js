@@ -33,7 +33,7 @@ export const extrairLiturgia = async () => {
 };
 
 // essa homilia é mais real, feita por um padre
-export const Extrairhomilia = async () => {
+export const extrairHomilia = async () => {
   try {
     const url = (await axios.get(process.env.URL_HOMILIA)).data;
     // extração do texto puro da homilia
