@@ -1,10 +1,9 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-
 import { converterParaVersiculo } from './utils/formatador.js';
 
-
 export const extrairLiturgia = async () => {
+
 
   try {
     const { data: html } = await axios.get(process.env.URL_LITURGIA);
@@ -105,6 +104,27 @@ export const extrairHomilia = async () => {
     //pega as informações iniciais
     const cabecalhoBloco = $('.ui-body.ui-body-a.ui-corner-all').first();
     const imagemCaminho = cabecalhoBloco.find('img').attr('src');
+
+
+    // extrair a cor liturgica com verificações
+    let corFormatada = "Cor não encontrada";
+
+    if (imagemCaminho) {
+
+      const match = imagemCaminho.match(/\/([^\/]+)\.(?:png|jpg|jpeg|gif|webp)$/i);
+      
+      if (match && match[1]) {
+        const corCrua = match[1].toLowerCase(); // converte para minúsculo para comparar
+        
+        const coresLiturgicas = ["branco", "verde", "roxo", "vermelho", "rosa", "preto"];
+
+    
+        if (coresLiturgicas.includes(corCrua)) {
+          corFormatada = corCrua.charAt(0).toUpperCase() + corCrua.slice(1);
+        }
+      }
+    }
+
     
     const infosCabecalho = cabecalhoBloco.text().split('\n').map(l => l.trim()).filter(l => l !== '');
 
@@ -123,7 +143,9 @@ export const extrairHomilia = async () => {
         data: infosCabecalho[0] || "",
         
         tempoLiturgico: [infosCabecalho[1], infosCabecalho[2]].filter(Boolean).join(' - '), 
-        imagem: urlImagemCompleta
+        imagem: urlImagemCompleta,
+
+        corLiturgica: corFormatada
       },
       texto: textoHomilia
     };
