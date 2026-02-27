@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import 'dotenv/config';
 
 export const extrairLiturgia = async () => {
 
@@ -29,12 +28,12 @@ export const extrairLiturgia = async () => {
 
 
   } catch (erro) {
-    return { erro: "Falha em buscar as liturgia do dia. Reporte no GitHub: https://github.com/Gustavo-PGM/liturgia-diaria-api" };
+    return { erro: "Falha em buscar as liturgia do dia. Reporte no GitHub: https://github.com/Gustavo-PGM/liturgia-diaria-api" , mensagem: erro};
   }
 };
 
 // essa homilia é mais real, feita por um padre
-export const Extrairhomilia = async () => {
+export const extrairHomilia = async () => {
   try {
     const url = (await axios.get(process.env.URL_HOMILIA)).data;
     // extração do texto puro da homilia
