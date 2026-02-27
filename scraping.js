@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import 'dotenv/config';
 
 export const extrairLiturgia = async () => {
 
