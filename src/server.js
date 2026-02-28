@@ -27,14 +27,18 @@ app.get("/", async (request, response) => {
 
       informacoesDoDia: {
 
-        data: homiliaData.informacoesDia?.data || "Data não encontrada",
-        tempoLiturgico: homiliaData.informacoesDia?.tempoLiturgico || "Tempo litúrgico não encontrado",
-        cor: homiliaData.informacoesDia?.corLiturgica || "Cor não encontrada",
-        imagemTempo: homiliaData.informacoesDia?.imagem || null
+        data: homiliaData.informacoesDoDia?.data || "Data não encontrada",
+        tempoLiturgico: homiliaData.informacoesDoDia?.tempoLiturgico || "Tempo litúrgico não encontrado",
+        cor: homiliaData.informacoesDoDia?.corLiturgica || "Cor não encontrada",
+        imagemTempo: homiliaData.informacoesDoDia?.imagem || null
       },
-
-      ...liturgia,  // '...liturgia' já manda Leitura, Salmo e Evangelho aqui dentro direto
-      homilia: homiliaData.texto
+      ...liturgia, // '...liturgia' já manda Leitura, Salmo e Evangelho aqui dentro direto
+      
+      
+      homilia: {
+        pregador: homiliaData.conteudo?.autor || "Pe. João Manoel Lopes",
+        texto: homiliaData.conteudo?.texto || "Texto não disponível"
+      }
     };
 
     // guarda no banco para não precisar fazer scraping de novo
