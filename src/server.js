@@ -8,7 +8,8 @@ app.get("/", async (request, response) => {
     const liturgia = await extrairLiturgia();
     return response.json(liturgia);
   } catch (erro) {
-    console.error("Erro no teste:", erro);
-    return response.status(500).json({ erro: "Deu pau no scraping." });
+    return response.status(500).json({ erro: "Erro:", erro });
   }
 });
+
+export default app;
