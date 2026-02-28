@@ -20,7 +20,7 @@ export async function extrairLiturgia() {
   const extrairLeitura = (idBotao, idConteudo, tipo) => {
 
     const div = $(idConteudo);
-    if (!div.length || div.text().trim() === "") return "Não encontrada";
+    if (!div.length || div.text().trim() === "") return null;
 
     const referencia = $(`${idBotao} .referencia`).text().trim();
     const audio = div.find(".embeds-audio iframe").attr("src") || null;
@@ -85,11 +85,14 @@ export async function extrairLiturgia() {
   };
 
 
-  return {
+return {
     informacoesDoDia,
-    primeiraLeitura: extrairLeitura("#lit-1", "#liturgia-1", "padrao"),
-    salmo: extrairLeitura("#lit-2", "#liturgia-2", "salmo"),
-    segundaLeitura: extrairLeitura("#lit-3", "#liturgia-3", "padrao"),
-    evangelho: extrairLeitura("#lit-4", "#liturgia-4", "evangelho")
+    // Agrupando tudo dentro do objeto leituras
+    leituras: {
+      primeiraLeitura: extrairLeitura("#lit-1", "#liturgia-1", "padrao"),
+      salmo: extrairLeitura("#lit-2", "#liturgia-2", "salmo"),
+      segundaLeitura: extrairLeitura("#lit-3", "#liturgia-3", "padrao"),
+      evangelho: extrairLeitura("#lit-4", "#liturgia-4", "evangelho")
+    }
   };
 }
