@@ -11,6 +11,15 @@ Uma API simples que fornece a **Liturgia Diária Católica** para aplicativos, s
 - JSON
 
 ---
+## 💾 Banco de Dados
+
+A API também **salva automaticamente os dados da liturgia no Supabase**, garantindo persistência e histórico das informações.
+
+📸 *Exemplo dos dados salvos no banco:*
+
+![Dados salvos no Supabase](https://github.com/user-attachments/assets/872d93a0-1196-4874-9788-5c28f43af4af)
+
+---
 ## 🚀 Como Usar
 
 A API é pública e pode ser consumida diretamente:

@@ -14,7 +14,8 @@ export const obterCacheSupabase = async (dataHoje) => {
 
 
 export const salvarCacheSupabase = async (dataHoje, jsonFormatado) => {
-  await supabase
+  const {error} = await supabase
     .from('cache_liturgia')
     .insert([{ data_referencia: dataHoje, liturgia_json: jsonFormatado }]);
+    
 };
