@@ -52,9 +52,10 @@ fetch('https://liturgia-diaria-api-alpha.vercel.app/')
     "referencia": "Gênesis 2,7-9; 3,1-7", 
     "texto": "Leitura do Livro do Gênesis...  " 
   },
-  "segundaLeitura": { 
+  "segundaLeitura": { // Ou não encontrada
     "referencia": "Romanos 5, 12-19", 
-    "texto": "Leitura da carta de São Paulo aos Romanos..." }, // Ou não encontrada
+    "texto": "Leitura da carta de São Paulo aos Romanos..." 
+    }, 
   "salmo": {
     "referencia": "50 (51)",
     "refrao": "Se levardes em conta nossas faltas...",
