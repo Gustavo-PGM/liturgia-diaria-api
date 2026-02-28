@@ -7,7 +7,6 @@ export async function extrairLiturgia() {
   const { data } = await axios.get(process.env.LITURGIA_DIARIA);
   const $ = cheerio.load(data);
 
-
   const informacoesDoDia = {
     cor: $(".cor-liturgica").text().replace("Cor Litúrgica:", "").trim() || "Não encontrada",
     data: `${$(".dia").first().text().trim()} ${$(".mes").first().text().trim()} ${$(".ano").first().text().trim()}`,
@@ -15,10 +14,11 @@ export async function extrairLiturgia() {
   };
 
 
-  const extrairLeitura = (idBotao, idConteudo, tipo, titulo) => {
+  const extrairLeitura = (idBotao, idConteudo, tipo) => {
     const div = $(idConteudo);
     
     if (!div.length || div.text().trim() === "") return null;
+
 
     const referencia = $(`${idBotao} .referencia`).text().trim();
     const audio = div.find(".embeds-audio iframe").attr("src") || null;
@@ -26,14 +26,14 @@ export async function extrairLiturgia() {
 
     let responsorio = null;
     let introducao = null;
+    let titulo = null;
     let linhas = [];
 
-
+    
     div.find("p").each((_, el) => {
 
       let txt = $(el).text().replace(/\s+/g, ' ').trim();
       let lower = txt.toLowerCase();
-
 
       if (!txt || txt === "R." || txt === "R") return;
       if (lower.includes("responsório sl") || lower.includes("salmo responsorial") || lower.includes("aleluia")) return;
@@ -44,11 +44,11 @@ export async function extrairLiturgia() {
 
       if (tipo === "salmo") {
 
-
         if (!responsorio && (txt.startsWith("-") || txt.startsWith("—"))) {
           responsorio = txt.replace(/[-—]/g, "").trim();
           return; 
         }
+
 
         if (txt.replace(/[-—]/g, "").trim() === responsorio) return;
 
@@ -56,6 +56,7 @@ export async function extrairLiturgia() {
       } 
 
       else if (tipo === "evangelho") {
+
         if (lower.includes("proclamação do evangelho")) {
           introducao = txt.replace(/[-—]/g, "").trim() + " - Glória a vós, Senhor.";
           return;
@@ -63,21 +64,32 @@ export async function extrairLiturgia() {
 
         if (lower.includes("evangelho (")) return; 
         
-        linhas.push(txt.includes("Palavra da Salvação") ? `- ${txt}` : txt);
+        if (txt.includes("Palavra da Salvação")) {
+          linhas.push(`- ${txt.replace(/[-—]/g, "").trim()}`);
+        } else {
+          linhas.push(txt);
+        }
       } 
       else {
+
         if (lower.includes("primeira leitura (") || lower.includes("segunda leitura (")) return;
-        if (lower.startsWith("leitura do") || lower.startsWith("leitura da")) return;
         
+        if (!titulo && (lower.startsWith("leitura do") || lower.startsWith("leitura da") || lower.startsWith("início do") || lower.startsWith("início da") || lower.startsWith("profecia de") || lower.startsWith("livro de"))) {
+          titulo = txt;
+          return;
+        }
+        
+
         linhas.push(txt);
       }
     });
 
-
-    const resultado = { titulo, referencia };
+    const resultado = { referencia };
+    if (titulo) resultado.titulo = titulo;
     if (introducao) resultado.introducao = introducao;
     if (responsorio) resultado.responsorio = responsorio;
     
+
     resultado.texto = converterParaVersiculo(linhas.join(" ").trim());
     resultado.audio = audio;
 
@@ -85,13 +97,13 @@ export async function extrairLiturgia() {
   };
 
   return {
-    
+
     informacoesDoDia,
     leituras: {
-      primeiraLeitura: extrairLeitura("#lit-1", "#liturgia-1", "padrao", "Primeira Leitura"),
-      salmo: extrairLeitura("#lit-2", "#liturgia-2", "salmo", "Salmo"),
-      segundaLeitura: extrairLeitura("#lit-3", "#liturgia-3", "padrao", "Segunda Leitura"),
-      evangelho: extrairLeitura("#lit-4", "#liturgia-4", "evangelho", "Evangelho")
+      primeiraLeitura: extrairLeitura("#lit-1", "#liturgia-1", "padrao"),
+      salmo: extrairLeitura("#lit-2", "#liturgia-2", "salmo"),
+      segundaLeitura: extrairLeitura("#lit-3", "#liturgia-3", "padrao"),
+      evangelho: extrairLeitura("#lit-4", "#liturgia-4", "evangelho")
     }
   };
 }
