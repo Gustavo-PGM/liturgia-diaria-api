@@ -1,6 +1,6 @@
 import express from "express";
 import { extrairLiturgia, extrairHomilia } from "./scraping.js"; 
-import { obterCacheSupabase, salvarCacheSupabase } from "./utils/cache.js";
+import { obterCacheSupabase, salvarCacheSupabase } from "./utils/cache.js";;
 
 const app = express();
 
@@ -43,7 +43,7 @@ app.get("/", async (request, response) => {
     return response.json(respostaFormatada);
 
   } catch (erro) {
-    return response.status(500).json({ erro: "Falha interna no servidor." });
+    return response.status(500).json({ erro: "Falha interna no servidor:", erro});
   }
 });
 
