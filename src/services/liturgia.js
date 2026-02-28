@@ -4,7 +4,7 @@ import { converterParaVersiculo } from "../utils/formatador.js";
 
 export async function extrairLiturgia() {
 
-  const { data } = await axios.get(process.env.LITURGIA_DIARIA);
+  const { data } = await axios.get(process.env.URL_LITURGIA);
   const $ = cheerio.load(data);
 
   const informacoesDoDia = {
