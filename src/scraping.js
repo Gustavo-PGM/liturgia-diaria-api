@@ -140,7 +140,7 @@ export const extrairHomilia = async () => {
 
     return {
 
-      informacoesDia: {
+      informacoesDoDia: {
         data: infosCabecalho[0] || "",
         
         tempoLiturgico: [infosCabecalho[1], infosCabecalho[2]].filter(Boolean).join(' - '), 
@@ -148,7 +148,11 @@ export const extrairHomilia = async () => {
 
         corLiturgica: corFormatada
       },
-      texto: textoHomilia
+      
+      conteudo: {
+        autor: "Pe. João Manoel Lopes",
+        texto: textoHomilia
+      }
     };
 
   } catch (erro) {

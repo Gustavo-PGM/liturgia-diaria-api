@@ -1,6 +1,6 @@
 # 📖 API – Liturgia Diária
 
-Uma API simples que fornece a **Liturgia Diária Católica** para aplicativos, sites, sistemas paroquiais ou projetos pessoais.
+Uma API simples que fornece a **Liturgia Diária Católica** para aplicativos, sites, sistemas paroquiais ou projetos pessoais, salvando os dados no **Supabase** para funcionar como cache, evitando scraping e melhorando a performance.
 
 ---
 ## 🛠 Tecnologias Utilizadas
@@ -31,7 +31,7 @@ A API é pública e pode ser consumida diretamente:
 
 ### Exemplo de requisição (JavaScript)
 ```javascript
-fetch('[https://liturgia-diaria-api-alpha.vercel.app/](https://liturgia-diaria-api-alpha.vercel.app/)')
+fetch('https://liturgia-diaria-api-alpha.vercel.app/')
   .then(res => res.json())
   .then(data => console.log(data.evangelho.texto));
 ```
@@ -41,24 +41,34 @@ fetch('[https://liturgia-diaria-api-alpha.vercel.app/](https://liturgia-diaria-a
 ---
 ```json
 {
+  {
   "informacoesDoDia": {
-    "data": "Sexta-feira, 27 de Fevereiro de 2026",
-    "tempoLiturgico": "1a. Semana da Quaresma - Ciclo da Pascoa",
+    "data": "Domingo, 22 de Fevereiro de 2026",
+    "tempoLiturgico": "1o. Domingo da Quaresma - Ciclo da Pascoa",
     "cor": "Roxo",
     "imagemTempo": "https://sagradaliturgia.com.br/images/roxo.png"
   },
-  "segundaLeitura": "Não encontrada",
+  "primeiraLeitura": { 
+    "referencia": "Gênesis 2,7-9; 3,1-7", 
+    "texto": "Leitura do Livro do Gênesis...  " 
+  },
+  "segundaLeitura": { 
+    "referencia": "Romanos 5, 12-19", 
+    "texto": "Leitura da carta de São Paulo aos Romanos..." }, // Ou não encontrada
   "salmo": {
-    "referencia": "129(130)",
+    "referencia": "50 (51)",
     "refrao": "Se levardes em conta nossas faltas...",
-    "texto": "Das profundezas eu clamo a vós..."
+    "texto": "Piedade, ó Senhor, tende piedade, pois pecamos contra vós"
   },
   "evangelho": {
-    "referencia": "Mateus 5,20-26",
-    "introducao": "Proclamação do Evangelho de Jesus Cristo segundo Mateus",
-    "texto": "Naquele tempo, disse Jesus..."
+    "referencia": "Mateus 4,1-11",
+    "introducao": "Proclamação...",
+    "texto": ".Naquele tempo..."
   },
-  "homilia": "A verdadeira justiça não se limita..."
+  "homilia": {
+    "pregador": "Pe. João Manoel Lopes",
+    "texto": "O deserto das tentações revela cristo..."
+  }
 }
 ```
 
