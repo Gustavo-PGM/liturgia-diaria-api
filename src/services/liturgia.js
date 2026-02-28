@@ -43,6 +43,7 @@ export async function extrairLiturgia() {
       if (lower.includes("ele está no meio de nós") || lower.includes("glória a vós, senhor")) return;
       if (lower.includes("eis o tempo") && !lower.includes("naquele tempo")) return;
       
+      
       if (tipo === "salmo") {
         if (!responsorio && (txt.startsWith("-") || txt.startsWith("—"))) {
           responsorio = txt.replace(/[-—]/g, "").trim();
